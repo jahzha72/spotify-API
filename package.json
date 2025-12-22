@@ -1,0 +1,15 @@
+{
+  "tracks": {
+    "items": [
+      {
+        "name": "Song Title",
+        "artists": [{ "name": "Artist Name" }],
+        "album": {
+          "images": [{ "url": "https://image-url.jpg" }],
+          "name": "Album Name"
+        },
+        "external_urls": { "spotify": "https://open.spotify.com/track/..." }
+      }
+    ]
+  }
+}

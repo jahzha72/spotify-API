@@ -1,0 +1,96 @@
+:root {
+    --spotify-green: #1DB954;
+    --dark-bg: #121212;
+    --card-bg: #181818;
+    --text-color: #ffffff;
+}
+
+body {
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    text-align: center;
+}
+
+header { padding: 40px 20px; }
+
+.search-container { margin-bottom: 20px; }
+
+input {
+    padding: 12px;
+    width: 60%;
+    max-width: 400px;
+    border-radius: 20px;
+    border: none;
+    outline: none;
+}
+
+button {
+    padding: 12px 25px;
+    border-radius: 20px;
+    background-color: var(--spotify-green);
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+button:hover { transform: scale(1.05); }
+
+/* Requirement #19: Grid Gallery */
+.grid-gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 20px;
+    padding: 20px;
+}
+
+/* Requirement #19: Card Layout & Hover Effect */
+.card {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    transition: 0.3s;
+}
+
+.card:hover { background-color: #282828; }
+
+.card img {
+    width: 100%;
+    border-radius: 4px;
+    aspect-ratio: 1/1;
+    object-fit: cover;
+}
+
+.hidden { display: none; }
+.error-msg { color: #ff4444; margin: 20px; }
+
+/* Requirement #11: Responsive Design */
+@media (max-width: 600px) {
+    input { width: 80%; }
+    .grid-gallery { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); }
+}
+.play-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background-color: var(--spotify-green);
+    color: black;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    border: none;
+    cursor: pointer;
+}
+
+.play-btn:hover {
+    background-color: #1ed760;
+    transform: scale(1.02);
+}
+
+.no-preview {
+    font-size: 0.7rem;
+    color: var(--spotify-grey);
+    margin-top: 10px;
+}
