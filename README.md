@@ -17,4 +17,4 @@ A modern, responsive web application that integrates the **Spotify Web API** to 
 ## ⚙️ Setup & Installation
 1. **Clone the Repository**:
    ```bash
-   git clone [https://github.com/yourusername/spotify-explorer.git]
+   git clone (https://github.com/jahzha72/spotify-API.git)
