@@ -2,33 +2,111 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spotify Explorer</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="styles.css">
+    <title>Spotify Search</title>
 </head>
 <body>
+    <h1>Spotify Search</h1>
+    <form action="/search" method="POST">
+        <input type="text" name="query" placeholder="Search songs, artists, albums, playlists" required>
+        <button type="submit">Search</button>
+    </form>
 
-    <header>
-        <h1>Spotify Music Search</h1>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Search for songs, albums, or playlists...">
-            <button id="searchBtn">Search</button>
-        </div>
-    </header>
+<div style="text-align:center; margin-bottom:30px;">
+  <button id="openPlaylistModal">十 Create Playlist</button>
+</div>
 
-    <main>
-        <div id="loader" class="hidden">Loading...</div>
-        
-        <div id="errorContainer" class="hidden error-msg"></div>
+<div class="modal-overlay" id="playlistModal">
+  <div class="modal">
+    <h2>Create Playlist</h2>
 
-        <div id="resultsContainer" class="grid-gallery"></div>
-    </main>
+    <form action="/playlist" method="POST">
+      <input type="text" name="name" placeholder="Playlist name" required>
+      <button type="submit">Create</button>
+    </form>
 
-    <footer>
-        <p>Data provided by <a href="https://api.spotify.com/v1/artists/1vCWHaC5f2uS3yhpwWbIA6/albums9" target="_blank">Spotify Web API</a></p>
-    </footer>
+    <span class="close-modal" id="closePlaylistModal">✕</span>
+  </div>
+</div>
 
-    <script src="config.js"></script>
-    <script src="script.js"></script>
+    <% if (data) { %>
+
+        <% if (data.tracks && data.tracks.items.length > 0) { %>
+            <h2>Tracks</h2>
+            <ul>
+            <% data.tracks.items.forEach(track => { %>
+                <li>
+                    <% if(track.album.images[0]) { %>
+                        <img src="<%= track.album.images[0].url %>" alt="Album cover">
+                    <% } %>
+                    <strong><%= track.name %></strong>
+                    <p><%= track.artists.map(a => a.name).join(', ') %></p>
+                    <a href="<%= track.external_urls.spotify %>" target="_blank">Open in Spotify</a>
+                </li>
+            <% }) %>
+            </ul>
+        <% } %>
+
+        <% if (data.albums && data.albums.items.length > 0) { %>
+            <h2>Albums</h2>
+            <ul>
+            <% data.albums.items.forEach(album => { %>
+                <li>
+                    <% if(album.images[0]) { %>
+                        <img src="<%= album.images[0].url %>" alt="Album cover">
+                    <% } %>
+                    <strong><%= album.name %></strong>
+                    <p><%= album.artists.map(a => a.name).join(', ') %></p>
+                    <a href="<%= album.external_urls.spotify %>" target="_blank">Open in Spotify</a>
+                </li>
+            <% }) %>
+            </ul>
+        <% } %>
+
+        <% if (data.artists && data.artists.items.length > 0) { %>
+            <h2>Artists</h2>
+            <ul>
+            <% data.artists.items.forEach(artist => { %>
+                <li>
+                    <% if(artist.images && artist.images[0]) { %>
+                        <img src="<%= artist.images[0].url %>" alt="Artist image">
+                    <% } %>
+                    <strong><%= artist.name %></strong>
+                    <a href="<%= artist.external_urls.spotify %>" target="_blank">Open in Spotify</a>
+                </li>
+            <% }) %>
+            </ul>
+        <% } %>
+
+        <% if (data.playlists && data.playlists.items.length > 0) { %>
+            <h2>Playlists</h2>
+            <ul>
+            <% data.playlists.items.forEach(playlist => { %>
+                <li>
+                    <% if(playlist.images && playlist.images[0]) { %>
+                        <img src="<%= playlist.images[0].url %>" alt="Playlist cover">
+                    <% } %>
+                    <strong><%= playlist.name %></strong>
+                    <p>By: <%= playlist.owner.display_name %></p>
+                    <a href="<%= playlist.external_urls.spotify %>" target="_blank">Open in Spotify</a>
+                </li>
+            <% }) %>
+            </ul>
+        <% } %>
+
+    <% } %>
+    <script>
+  const openBtn = document.getElementById('openPlaylistModal');
+  const closeBtn = document.getElementById('closePlaylistModal');
+  const modal = document.getElementById('playlistModal');
+
+  openBtn.onclick = () => modal.classList.add('active');
+  closeBtn.onclick = () => modal.classList.remove('active');
+
+  modal.onclick = (e) => {
+    if (e.target === modal) modal.classList.remove('active');
+  };
+</script>
+
 </body>
 </html>
