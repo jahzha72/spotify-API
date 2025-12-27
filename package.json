@@ -1,15 +1,22 @@
 {
-  "tracks": {
-    "items": [
-      {
-        "name": "Song Title",
-        "artists": [{ "name": "Artist Name" }],
-        "album": {
-          "images": [{ "url": "https://image-url.jpg" }],
-          "name": "Album Name"
-        },
-        "external_urls": { "spotify": "https://open.spotify.com/track/..." }
-      }
-    ]
+  "name": "spotify-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "axios": "^1.13.2",
+    "cookie-parser": "^1.4.7",
+    "dotenv": "^17.2.3",
+    "ejs": "^3.1.10",
+    "express": "^5.2.1",
+    "node-fetch": "^3.3.2",
+    "querystring": "^0.2.1"
   }
 }
